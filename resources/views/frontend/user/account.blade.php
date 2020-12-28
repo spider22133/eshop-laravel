@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('frontend.app')
 
 @section('content')
-
-   <h1>Your account</h1>
-
+        <div class="container">
+            <h1>Your account</h1>
+        </div>
 @endsection

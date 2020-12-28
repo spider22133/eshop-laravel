@@ -22,7 +22,7 @@
 <body class="antialiased">
 <header>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom box-shadow">
-        <div class="my-0 mr-md-auto"><a class="py-2" href="#">
+        <div class="my-0 mr-md-auto"><a class="py-2" href="/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                      class="d-block mx-auto">
@@ -36,14 +36,11 @@
                 </svg>
             </a></div>
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="#">Features</a>
-            <a class="p-2 text-dark" href="#">Enterprise</a>
-            <a class="p-2 text-dark" href="#">Support</a>
-            <a class="p-2 text-dark" href="#">Pricing</a>
+            <a class="p-2 text-dark" href="/products">Catalog</a>
         </nav>
         @if (Route::has('login'))
             @auth
-                <a href="{{ url('/admin') }}" class="text-primary">{{ Auth::user()->name }}</a>
+                <a href="{{ Auth::user()->isAdmin() ? url('/admin') : url('/account')  }}" class="text-primary">{{ Auth::user()->name }}</a>
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.product.catalog', ['products' => Product::all()]);
     }
 
     /**
@@ -46,7 +46,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('frontend.product.single', ['product' => $product]);
     }
 
     /**
