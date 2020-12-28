@@ -1,0 +1,44 @@
+// Tailwind css
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+a .img-thumbnail:hover {
+    border-color: black;
+}
+
+.price .main-price {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    color: #eb0037;
+    font-weight: 700;
+}
+.price .discount-price {
+    color: #66676e;
+    text-decoration: line-through;
+    font-weight: 400;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
