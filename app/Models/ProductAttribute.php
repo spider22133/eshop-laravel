@@ -12,4 +12,8 @@ class ProductAttribute extends Model
     public function attributes(){
         return $this->belongsToMany(Attribute::class, 'product_attribute_combination');
     }
+
+    public function images() {
+        return $this->belongsToMany(Image::class, 'product_attribute_images');
+    }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Image;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,7 +20,6 @@ class DatabaseSeeder extends Seeder
 
          \App\Models\Product::factory(10)->create()
              ->each(function ($product){
-
                  \App\Models\ProductAttribute::factory(rand(2,4))->create([
                      'product_id' => $product->id,
                      'article_number' => $product->article_number,
@@ -28,7 +28,16 @@ class DatabaseSeeder extends Seeder
                  ]);
              });
 
-        \App\Models\Image::factory(\App\Models\ProductAttribute::count())->create();
+            \App\Models\Image::factory(\App\Models\ProductAttribute::count())->create()
+                ->each(function ($image){
+                        DB::table("product_attribute_images")->insert([
+                            'product_attribute_id' => $image->id,
+                            'image_id' => $image->id,
+                            'created_at' => now(),
+                            'updated_at' => now()
+                        ]);
+                });
+
 
         $this->call([
             AttributeSeeder::class,
