@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Image;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,8 +26,9 @@ class DatabaseSeeder extends Seeder
                      'description' => $product->description,
                      'description_short' => $product->description_short
                  ]);
-
              });
+
+        \App\Models\Image::factory(\App\Models\ProductAttribute::count())->create();
 
         $this->call([
             AttributeSeeder::class,
