@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\ProductController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -19,12 +20,15 @@ Route::get('/', [ProductController::class, 'index'])->name('homepage');
 
 Route::get('/admin', function () {
     return view('dashboard');
-})->middleware(['auth','is_admin'])->name('dashboard');
+})->middleware(['auth', 'is_admin'])->name('dashboard');
 
-Route::resource('products',ProductController::class);
+Route::resource('products', ProductController::class);
 
-Route::get('/account',function () {
+Route::get('/account', function () {
     return view('frontend.user.account');
 })->middleware('auth');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+// Ajax queries
+Route::get('/get_product_by_id/{id}', [ProductAttributeController::class, 'indexAjax']);

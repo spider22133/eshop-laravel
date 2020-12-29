@@ -9,11 +9,19 @@ class ProductAttribute extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'article_number',
+    ];
+
     public function attributes(){
         return $this->belongsToMany(Attribute::class, 'product_attribute_combination');
     }
 
     public function images() {
         return $this->belongsToMany(Image::class, 'product_attribute_images');
+    }
+
+    public function product() {
+        return $this->belongsTo(Product::class);
     }
 }

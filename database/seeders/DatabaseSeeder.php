@@ -15,28 +15,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(10)->create();
 
 
-         \App\Models\Product::factory(10)->create()
-             ->each(function ($product){
-                 \App\Models\ProductAttribute::factory(rand(2,4))->create([
-                     'product_id' => $product->id,
-                     'article_number' => $product->article_number,
-                     'description' => $product->description,
-                     'description_short' => $product->description_short
-                 ]);
-             });
+        \App\Models\Product::factory(10)->create()
+            ->each(function ($product) {
+                for ($i = 1; $i <= rand(2, 4); $i++) {
+                    \App\Models\ProductAttribute::factory()->create([
+                        'product_id' => $product->id,
+                        'article_number' => $product->article_number . "-" . $i,
+                        'description' => $product->description,
+                        'description_short' => $product->description_short
+                    ]);
+                }
+            });
 
-            \App\Models\Image::factory(\App\Models\ProductAttribute::count())->create()
-                ->each(function ($image){
-                        DB::table("product_attribute_images")->insert([
-                            'product_attribute_id' => $image->id,
-                            'image_id' => $image->id,
-                            'created_at' => now(),
-                            'updated_at' => now()
-                        ]);
-                });
+        \App\Models\Image::factory(\App\Models\ProductAttribute::count())->create()
+            ->each(function ($image) {
+                DB::table("product_attribute_images")->insert([
+                    'product_attribute_id' => $image->id,
+                    'image_id' => $image->id,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            });
 
 
         $this->call([

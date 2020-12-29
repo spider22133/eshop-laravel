@@ -39236,8 +39236,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js"); /
 
 window.$ = __webpack_provided_window_dot_jQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default.a; // Import jQuery Plugins
 
-document.addEventListener("DOMContentLoaded", function (event) {// get_var_products_mini_card_ajax();
-  // loginFunc();
+document.addEventListener("DOMContentLoaded", function (event) {
+  get_var_products_mini_card_ajax(); // loginFunc();
 });
 
 function loginFunc(params) {
@@ -39296,31 +39296,30 @@ function get_var_products_mini_card_ajax() {
     element.addEventListener('mouseover', function (e) {
       e.preventDefault();
       var product_id = e.target.closest('div').id;
-      getProductCardData(product_id);
+      console.log(product_id);
+      getProductCardData(product_id, e.target);
     });
   });
   document.querySelector('.thumbs').addEventListener('mouseleave', function (e) {
     var product_id = document.querySelector('.product_thumb').id;
-    getProductCardData(product_id);
+    getProductCardData(product_id, e.target);
   });
 }
 
-function getProductCardData(product_id) {
-  var title_product = document.querySelector('.title_product'),
-      img_custom = document.querySelector('.img-custom'),
-      price = document.querySelector('.main-price'),
-      disc_price = document.querySelector('.discount-price');
-  fetch('product_var_data.php', {
-    method: "POST",
+function getProductCardData(product_id, target) {
+  var title_product = target.closest('.title_product'),
+      img_custom = target.closest('.img-custom'),
+      price = target.closest('.main-price'),
+      disc_price = target.closest('.discount-price');
+  fetch('/get_product_by_id/' + product_id, {
+    method: "GET",
     headers: {
       'Content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      product_id: product_id
-    })
+    }
   }).then(function (res) {
     return res.json();
   }).then(function (data) {
+    console.log(data);
     title_product.innerHTML = data.title;
     img_custom.src = data.src;
     price.src = data.price;
