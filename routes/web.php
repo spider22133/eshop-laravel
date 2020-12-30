@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProductAttributeController;
-use App\Http\Controllers\ProductController;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,19 +13,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ProductController::class, 'index'])->name('homepage');
 
-Route::get('/admin', function () {
-    return view('dashboard');
-})->middleware(['auth', 'is_admin'])->name('dashboard');
+//FRONTEND
+Route::namespace('Frontend')->group(function (){
+    Route::get('/', 'ProductController@index')->name('homepage');
+    Route::get('/catalog', 'ProductController@index')->name('catalog');
+    Route::get('/account', function () {
+        return view('frontend.user.account');
+    })->middleware('auth');
 
-Route::resource('products', ProductController::class);
+//Frontend Ajax queries
+    Route::get('/get_product_by_id/{id}', 'ProductAttributeController@indexAjax');
+});
 
-Route::get('/account', function () {
-    return view('frontend.user.account');
-})->middleware('auth');
 
+//BACKEND
+Route::group([
+    'name' => 'admin.',
+    'prefix' => 'admin',
+    'namespace' => 'Admin',
+    'middleware' => ['auth', 'is_admin'],
+], function () {
+    Route::get('/', function () { return view('dashboard'); })->name('dashboard');
+    Route::get('/products/create','ProductController@create')->middleware(['auth'])->name('product.create');
+});
+
+// AUTH
 require __DIR__ . '/auth.php';
 
-// Ajax queries
-Route::get('/get_product_by_id/{id}', [ProductAttributeController::class, 'indexAjax']);
+

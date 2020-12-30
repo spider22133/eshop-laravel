@@ -36,7 +36,7 @@
                 </svg>
             </a></div>
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="/products">Catalog</a>
+            <a class="p-2 text-dark" href="/catalog">Catalog</a>
         </nav>
         @if (Route::has('login'))
             @auth
@@ -61,6 +61,14 @@
 </header>
 <div class="bg-gray-100 dark:bg-gray-900">
     <main role="main">
+        @include('frontend.components.main-slider')
+        @isset($status)
+            <div class="container">
+                <div class="alert alert-primary">
+                    {!! $status !!}
+                </div>
+            </div>
+        @endisset
         @yield('content')
     </main>
 </div>

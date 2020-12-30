@@ -1,7 +1,6 @@
-@extends('frontend.app')
+@extends('layouts.frontend')
 
 @section('content')
-    @include('frontend.components.main-slider')
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
