@@ -395,11 +395,8 @@
     @keydown.escape="closeSideMenu"
 >
     <div class="py-4 text-gray-500 dark:text-gray-400">
-        <a
-            class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-            href="#"
-        >
-            Windmill
+        <a href="/admin">
+            <x-application-logo class="ml-6 block h-10 w-auto fill-current text-gray-600"/>
         </a>
         <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -409,7 +406,7 @@
               ></span>
                 <a
                     class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                    href="index.html"
+                    href="/admin"
                 >
                     <svg
                         class="w-5 h-5"
