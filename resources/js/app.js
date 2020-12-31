@@ -2,6 +2,7 @@ require('./bootstrap');
 
 require('alpinejs');
 
+
 // Register $ global var for jQuery
 import $ from 'jquery';
 
