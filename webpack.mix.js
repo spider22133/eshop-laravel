@@ -13,7 +13,9 @@ const mix = require('laravel-mix');
 
 mix.autoload({
     jquery: ['$', 'window.jQuery', 'jQuery']})
-    .js('resources/js/app.js', 'public/js').sass('resources/sass/app.scss', 'public/css')
+    .js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/admin_assets/sass/app.scss', 'public/admin_assets/css')
     .options({
         postCss: [
             require('postcss-import'),

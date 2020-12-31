@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // loginFunc();
 });
 
+
 function loginFunc(params) {
     var button_register = document.querySelectorAll('.register, .signin-image-link');
     var button_login = document.querySelectorAll('.login, .signup-image-link');
