@@ -18,12 +18,13 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
 
 
-        \App\Models\Product::factory(10)->create()
+        \App\Models\Product::factory(100)->create()
             ->each(function ($product) {
                 for ($i = 1; $i <= rand(2, 4); $i++) {
                     \App\Models\ProductAttribute::factory()->create([
                         'product_id' => $product->id,
                         'article_number' => $product->article_number . "-" . $i,
+                        'price' => rand(1000, 99999),
                         'description' => $product->description,
                         'description_short' => $product->description_short
                     ]);
@@ -42,6 +43,7 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
+            AttributeGroupSeeder::class,
             AttributeSeeder::class,
             AdminSeeder::class
         ]);

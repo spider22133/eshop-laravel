@@ -22,12 +22,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $status = Session::get('status');
-        $products = Product::orderBy('created_at', 'DESC')->simplePaginate(6);
 
-        return view('frontend.product.catalog', [
+        $products = Product::orderBy('created_at', 'DESC')->simplePaginate(10);
+
+
+        return view('backend.product.index', [
             'products' => $products,
-            'status' => $status
         ]);
     }
 

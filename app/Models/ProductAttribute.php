@@ -24,4 +24,8 @@ class ProductAttribute extends Model
     public function product() {
         return $this->belongsTo(Product::class);
     }
+
+//    public function getOneImageArray() {
+//       return $this->images()->select('src')->wherePivot('product_attribute_id', $this->id)->limit(1);;
+//    }
 }

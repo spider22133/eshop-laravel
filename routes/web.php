@@ -35,7 +35,7 @@ Route::group([
     'middleware' => ['auth', 'is_admin'],
 ], function () {
     Route::get('/', function () { return view('dashboard'); })->name('dashboard');
-    Route::get('/products/create','ProductController@create')->middleware(['auth'])->name('product.create');
+    Route::resource('products', 'ProductController' );
 });
 
 // AUTH
