@@ -20,9 +20,9 @@ class CreateProductAttributesTable extends Migration
             $table->text('description')->nullable();
             $table->text('description_short')->nullable();
             $table->string('link_rewrite')->nullable();
-            $table->decimal('price',20,6)->default('0.000000');
-            $table->decimal('discount_price',20,6)->default('0.000000');
-            $table->decimal('weight',20,6)->default('0.000000');
+            $table->integer('price')->default(0);
+            $table->integer('discount_price')->default(0);
+            $table->integer('weight')->default(0);
             $table->unsignedInteger('quantity')->nullable();
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

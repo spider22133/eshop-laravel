@@ -22,12 +22,12 @@ class CreateProductsTable extends Migration
             $table->text('description_short')->nullable();
             $table->string('link_rewrite')->nullable();
             $table->string('name');
-            $table->decimal('price',20,6)->default('0.000000');
-            $table->decimal('discount_price',20,6)->default('0.000000');
-            $table->decimal('width',20,6)->default('0.000000');
-            $table->decimal('height',20,6)->default('0.000000');
-            $table->decimal('depth',20,6)->default('0.000000');
-            $table->decimal('weight',20,6)->default('0.000000');
+            $table->integer('price')->default(0);
+            $table->integer('discount_price')->default(0);
+            $table->integer('width')->default(0);
+            $table->integer('height')->default(0);
+            $table->integer('depth')->default(0);
+            $table->integer('weight')->default(0);
             $table->timestamps();
         });
     }
