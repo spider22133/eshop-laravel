@@ -32,6 +32,7 @@ class ProductAttributeController extends Controller
             return response()->json([
                 'title' => "<span class='text-uppercase'>" . $var_product->product->name . "</span>",
                 'price' => $var_product->price,
+                'href' => "/products/" . $var_product->id,
                 'discount_price' => $var_product->discount_price,
                 'src' => $var_product->images[0]->src,
                 'product_id' => $article_number
@@ -63,10 +64,10 @@ class ProductAttributeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\ProductAttribute $productAttribute
+     * @param int id
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductAttribute $productAttribute)
+    public function show($id)
     {
         //
     }

@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
+use App\Models\ProductAttribute;
 
 class ProductController extends Controller
 {
@@ -55,12 +56,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Product $product
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        return view('frontend.product.single', ['product' => $product]);
+        return view('frontend.product.single', ['product' => ProductAttribute::findOrFail($id)]);
     }
 
     /**
