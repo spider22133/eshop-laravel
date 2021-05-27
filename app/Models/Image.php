@@ -15,7 +15,7 @@ class Image extends Model
      * @var array
      */
     protected $casts = [
-        'src' => 'array',
+        'src' => 'array'
     ];
 
 
