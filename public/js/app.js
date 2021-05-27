@@ -39307,7 +39307,6 @@ function get_var_products_mini_card_ajax() {
     element.addEventListener('mouseover', function (e) {
       e.preventDefault();
       var product_id = e.target.closest('div').id;
-      console.log(product_id);
       getProductCardData(product_id, e.target);
     });
   });
@@ -39318,8 +39317,10 @@ function get_var_products_mini_card_ajax() {
 }
 
 function getProductCardData(product_id, target) {
-  var title_product = target.closest('.title_product'),
-      img_custom = target.closest('.img-custom'),
+  var card_content = target.closest('.bd-placeholder-img').nextElementSibling,
+      title_product = card_content.children[1].firstElementChild.firstElementChild,
+      img_custom = target.closest('.bd-placeholder-img').firstElementChild,
+      url = card_content.children[1].firstElementChild,
       price = target.closest('.main-price'),
       disc_price = target.closest('.discount-price');
   fetch('/get_product_by_id/' + product_id, {
@@ -39330,11 +39331,10 @@ function getProductCardData(product_id, target) {
   }).then(function (res) {
     return res.json();
   }).then(function (data) {
-    console.log(data);
     title_product.innerHTML = data.title;
-    img_custom.src = data.src;
-    price.src = data.price;
-    disc_price.src = data.discount_price;
+    img_custom.src = data.src.medium;
+    url.href = data.href; //price.src = data.price;
+    //disc_price.src = data.discount_price;
   })["catch"](function (error) {
     return console.log(error);
   });
