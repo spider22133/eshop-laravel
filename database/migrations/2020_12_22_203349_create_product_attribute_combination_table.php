@@ -14,8 +14,8 @@ class CreateProductAttributeCombinationTable extends Migration
     public function up()
     {
         Schema::create('product_attribute_combination', function (Blueprint $table) {
-            $table->unsignedBigInteger('attribute_id')->nullable();
             $table->unsignedBigInteger('product_attribute_id')->nullable();
+            $table->unsignedBigInteger('attribute_id')->nullable();
             $table->timestamps();
 
             $table->primary(['attribute_id','product_attribute_id'],'apa_id');
