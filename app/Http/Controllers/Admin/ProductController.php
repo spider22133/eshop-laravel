@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Models\AttributeGroup;
 
 class ProductController extends Controller
 {
@@ -38,7 +39,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.product.create');
+        $attr_group = AttributeGroup::all();
+        return view('backend.product.create', ['attr_group' => $attr_group]);
     }
 
     /**
@@ -49,28 +51,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $request->validate([
-            'name' => 'required|min:3',
-            'article_num' => 'required',
-            'description' => 'min:10',
-            'image' => 'mimes:jpg,jpeg,bmp,png,gif'
-        ]);
-
-        $product = new Product([
-            'name' => $request['name'],
-            'article_number' => $request['article_num'],
-            'description' => $request['description'],
-        ]);
-
-        $product->save();
-
-        if ($request->image) {
-            $path = $request->file('image')->store('images');
-            saveImages($request->image, $product->id);
-        }
-
-        return redirect('/admin/products/' . $product->id);
+       //
     }
 
     /**

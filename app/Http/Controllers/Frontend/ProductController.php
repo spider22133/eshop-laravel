@@ -61,7 +61,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return view('frontend.product.single', ['product' => ProductAttribute::findOrFail($id)]);
+        return view('frontend.product.single', ['product' => Product::findOrFail($id)]);
     }
 
     /**
