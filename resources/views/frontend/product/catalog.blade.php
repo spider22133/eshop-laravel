@@ -11,13 +11,15 @@
             <div class="row">
 
                 @foreach ($products as $item)
-                    <div class="col-md-4">
+                    <div class="col-md-4 d-flex align-items-stretch">
                         <div class="card mb-4 shadow-sm">
-                            <div class="bd-placeholder-img card-img-top p-3">
-                                <img class="img-fluid img-custom"
-                                     src="{{ $item->product_attributes[0]->images[0]->src['medium'] }}" alt="">
+                            <div class="bd-placeholder-img card-img-top p-3" >
+
+                                <img class="img-fluid img-custom" 
+                                     src="{{ isset($item->product_attributes[0]) ? $item->product_attributes[0]->images[0]->src['small'] :
+                                     asset($item->images[0]->src['full']) }}" alt="">
                                 <div class="thumbs d-flex"
-                                     style="transform: translateY(0); margin-top: -95px; width: 100%; background-color: #fff">
+                                     style="width: 100%; background-color: #fff">
 
                                     @foreach ($item->product_attributes as $var_item)
                                         <div id="{{ $var_item->article_number }}" class="product_thumb d-flex pr-1">

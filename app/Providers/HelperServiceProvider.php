@@ -13,7 +13,7 @@ class HelperServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        require_once app_path('Helpers/ImgProcessHelper.php');
+        require_once app_path('Services/ImgService.php');
     }
 
     /**
