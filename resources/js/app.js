@@ -24,7 +24,6 @@ function loginFunc(params) {
 
     button_register.forEach(element => {
         element.addEventListener('click', function (e) {
-            console.log(e.target);
             if (signin_form.classList.contains('fadeInDown')) {
                 elHide(signin_form);
                 signin_form.classList.remove('fadeInDown');

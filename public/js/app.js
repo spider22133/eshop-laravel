@@ -39258,8 +39258,6 @@ function loginFunc(params) {
   var signin_form = document.querySelector('.sign-in');
   button_register.forEach(function (element) {
     element.addEventListener('click', function (e) {
-      console.log(e.target);
-
       if (signin_form.classList.contains('fadeInDown')) {
         elHide(signin_form);
         signin_form.classList.remove('fadeInDown');

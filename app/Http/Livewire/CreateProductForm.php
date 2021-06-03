@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Product;
 use phpDocumentor\Reflection\Types\This;
 use Livewire\WithFileUploads;
+use App\Models\Attribute;
 
 class CreateProductForm extends Component
 {
@@ -14,9 +15,17 @@ class CreateProductForm extends Component
     public $attr_group;
     public $name;
     public $article_num;
+    public $type;
     public $description;
+    public $attr_type = [];
     public $images = [];
 
+
+    /**
+     * Store new product in database.
+     *
+     * @return void
+     */
     public function store() {
         $this->validate([
             'name' => 'required|min:3',
@@ -38,6 +47,15 @@ class CreateProductForm extends Component
 
 
         return redirect('/admin/products/' . $product->id);
+    }
+
+    public function toggleAttr($value)
+    {
+       $this->emit('toggleAttr', $this->attr_type);
+    }
+
+    public function getAttrValues() {
+        return Attribute::where('id_attribute_group', $this->attr_type)->get();
     }
 
     public function render()
