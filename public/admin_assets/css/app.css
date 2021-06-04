@@ -31402,6 +31402,102 @@ select{
   }
 }
 
+@-webkit-keyframes fade-in-down{
+  0%{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-down{
+  0%{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes fade-out-down{
+  from{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes fade-out-down{
+  from{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@-webkit-keyframes fade-in-up{
+  0%{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up{
+  0%{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes fade-out-up{
+  from{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes fade-out-up{
+  from{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  to{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
 .animate-none{
   -webkit-animation: none;
           animation: none;
@@ -31425,6 +31521,26 @@ select{
 .animate-bounce{
   -webkit-animation: bounce 1s infinite;
           animation: bounce 1s infinite;
+}
+
+.animate-fade-in-down{
+  -webkit-animation: fade-in-down 0.5s ease-out;
+          animation: fade-in-down 0.5s ease-out;
+}
+
+.animate-fade-out-down{
+  -webkit-animation: fade-out-down 0.5s ease-out;
+          animation: fade-out-down 0.5s ease-out;
+}
+
+.animate-fade-in-up{
+  -webkit-animation: fade-in-up 0.5s ease-out;
+          animation: fade-in-up 0.5s ease-out;
+}
+
+.animate-fade-out-up{
+  -webkit-animation: fade-out-up 0.5s ease-out;
+          animation: fade-out-up 0.5s ease-out;
 }
 
 html {
@@ -70311,6 +70427,26 @@ readers do not read off random characters that represent icons */
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
   }
+
+  .sm\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.5s ease-out;
+            animation: fade-in-down 0.5s ease-out;
+  }
+
+  .sm\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.5s ease-out;
+            animation: fade-out-down 0.5s ease-out;
+  }
+
+  .sm\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.5s ease-out;
+            animation: fade-in-up 0.5s ease-out;
+  }
+
+  .sm\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.5s ease-out;
+            animation: fade-out-up 0.5s ease-out;
+  }
 }
 
 @media (min-width: 768px){
@@ -100915,6 +101051,26 @@ readers do not read off random characters that represent icons */
   .md\:animate-bounce{
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .md\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.5s ease-out;
+            animation: fade-in-down 0.5s ease-out;
+  }
+
+  .md\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.5s ease-out;
+            animation: fade-out-down 0.5s ease-out;
+  }
+
+  .md\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.5s ease-out;
+            animation: fade-in-up 0.5s ease-out;
+  }
+
+  .md\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.5s ease-out;
+            animation: fade-out-up 0.5s ease-out;
   }
 }
 
@@ -131521,6 +131677,26 @@ readers do not read off random characters that represent icons */
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
   }
+
+  .lg\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.5s ease-out;
+            animation: fade-in-down 0.5s ease-out;
+  }
+
+  .lg\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.5s ease-out;
+            animation: fade-out-down 0.5s ease-out;
+  }
+
+  .lg\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.5s ease-out;
+            animation: fade-in-up 0.5s ease-out;
+  }
+
+  .lg\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.5s ease-out;
+            animation: fade-out-up 0.5s ease-out;
+  }
 }
 
 @media (min-width: 1280px){
@@ -162126,6 +162302,26 @@ readers do not read off random characters that represent icons */
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
   }
+
+  .xl\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.5s ease-out;
+            animation: fade-in-down 0.5s ease-out;
+  }
+
+  .xl\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.5s ease-out;
+            animation: fade-out-down 0.5s ease-out;
+  }
+
+  .xl\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.5s ease-out;
+            animation: fade-in-up 0.5s ease-out;
+  }
+
+  .xl\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.5s ease-out;
+            animation: fade-out-up 0.5s ease-out;
+  }
 }
 
 @media (min-width: 1536px){
@@ -192730,6 +192926,26 @@ readers do not read off random characters that represent icons */
   .\32xl\:animate-bounce{
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .\32xl\:animate-fade-in-down{
+    -webkit-animation: fade-in-down 0.5s ease-out;
+            animation: fade-in-down 0.5s ease-out;
+  }
+
+  .\32xl\:animate-fade-out-down{
+    -webkit-animation: fade-out-down 0.5s ease-out;
+            animation: fade-out-down 0.5s ease-out;
+  }
+
+  .\32xl\:animate-fade-in-up{
+    -webkit-animation: fade-in-up 0.5s ease-out;
+            animation: fade-in-up 0.5s ease-out;
+  }
+
+  .\32xl\:animate-fade-out-up{
+    -webkit-animation: fade-out-up 0.5s ease-out;
+            animation: fade-out-up 0.5s ease-out;
   }
 }
 

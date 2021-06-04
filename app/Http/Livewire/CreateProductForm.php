@@ -20,6 +20,8 @@ class CreateProductForm extends Component
     public $attr_type = [];
     public $images = [];
 
+    public $selected = 0;
+
 
     /**
      * Store new product in database.
@@ -49,9 +51,10 @@ class CreateProductForm extends Component
         return redirect('/admin/products/' . $product->id);
     }
 
-    public function toggleAttr($value)
+    public function toggleAttr($attr_types)
     {
-       $this->emit('toggleAttr', $this->attr_type);
+        if($attr_types) $this->selected = 1;
+       $this->emit('toggleAttr', $attr_types);
     }
 
     public function getAttrValues() {
