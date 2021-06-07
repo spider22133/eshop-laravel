@@ -7,7 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use App\Models\AttributeGroup;
+
 
 class ProductController extends Controller
 {
@@ -39,8 +39,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $attr_group = AttributeGroup::all();
-        return view('backend.product.create', ['attr_group' => $attr_group]);
+
+        return view('backend.product.create');
     }
 
     /**

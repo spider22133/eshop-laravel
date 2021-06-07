@@ -10,7 +10,7 @@ class AttributeGroup extends Model
     use HasFactory;
 
     public function attributes() {
-        return $this->hasMany(Attribute::class);
+        return $this->hasMany(Attribute::class,'id_attribute_group');
     }
 
 }

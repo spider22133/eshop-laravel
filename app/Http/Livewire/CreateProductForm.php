@@ -7,20 +7,42 @@ use App\Models\Product;
 use phpDocumentor\Reflection\Types\This;
 use Livewire\WithFileUploads;
 use App\Models\Attribute;
+use App\Models\AttributeGroup;
 
 class CreateProductForm extends Component
 {
     use WithFileUploads;
 
-    public $attr_group;
-    public $name;
-    public $article_num;
-    public $type;
-    public $description;
-    public $attr_type = [];
+    public $attr_group, $name, $article_num, $type, $description, $attr;
+    public $attr_types = [];
     public $images = [];
 
-    public $selected = 0;
+
+
+    /**
+     * mount
+     *
+     * @return void
+     */
+    public function mount() {
+        $this->attr_group = AttributeGroup::all();
+        foreach($this->attr_group as $group) {
+            array_push($this->attr_types, strtolower($group->name));
+        }
+    }
+
+    /**
+     * create product combinations
+     *
+     * @return void
+     */
+    public function createCombinations() {
+        $comb_arr = [];
+        foreach($this->attr_types as $key) {
+            $comb_arr[] = $this->attr[$key];
+        }
+        dd($comb_arr);
+    }
 
 
     /**
@@ -49,16 +71,6 @@ class CreateProductForm extends Component
 
 
         return redirect('/admin/products/' . $product->id);
-    }
-
-    public function toggleAttr($attr_types)
-    {
-        if($attr_types) $this->selected = 1;
-       $this->emit('toggleAttr', $attr_types);
-    }
-
-    public function getAttrValues() {
-        return Attribute::where('id_attribute_group', $this->attr_type)->get();
     }
 
     public function render()
