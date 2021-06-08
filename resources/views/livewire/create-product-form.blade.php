@@ -31,12 +31,12 @@
         <div class="md:w-2/3">
             <select name="type" class="form-select block w-full focus:bg-white" id="type" wire:model="type" x-model="selectedOption">
                 <option value="Default">Default</option>
-                <option value="Variable product">Variable product</option>
+                <option value="variable">Variable product</option>
             </select>
             @error('type') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
     </div>
-    <div class="variable_product_container mb-6 animate-fade-in-down" x-show="selectedOption === 'Variable product'">
+    <div class="variable_product_container mb-6 animate-fade-in-down" x-show="selectedOption === 'variable'">
         <div id="combinations" class="variable_product_card border border-gray-400 rounded" x-data="{selected:null}">
             <div class="variable_product_card_header flex items-center justify-between px-4 py-3 border-b border-gray-200" x-on:click="selected !== 1 ? selected = 1 : selected = null">
                 <h2 class="font-bold">Combinations</h2>
@@ -45,46 +45,78 @@
             <div class="variable_product_card_content relative overflow-hidden transition-all max-h-0 duration-700 bg-gray-50"
             x-ref="container1"
             x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
-            @if ($attr_group->count())
-                <div class="md:flex pt-5 pr-10 pl-10 pb-10">
-                    <div class="md:w-1/3">
-                        <h2 class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" >
-                            Choose attributes:
-                        </h2>
-                    </div>
-
-                    <div class="md:w-2/3">
-                            <div class="flex flex-row flex-wrap">
-                                @foreach ($attr_group as $item)
-                                    <div class="px-2 flex-1">
-                                        <label class="text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4"
-                                        for="attr.{{strtolower($item->name)}}">{{$item->name}}:</label>
-                                            <select
-                                            id="attr.{{strtolower($item->name)}}"
-                                            name="attr.{{strtolower($item->name)}}"
-                                            class="block w-full focus:bg-white"
-                                            wire:model="attr.{{strtolower($item->name)}}"
-                                            multiple>
-
-                                                @foreach ($item->attributes as $attr )
-                                                    <option value="{{$attr->name}}">{{$attr->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        @error("attr.{{strtolower($item->name)}}") <span class="text-red-500">{{ $message }}</span> @enderror
-                                    </div>
-                                @endforeach
+                    @if ($attr_group->count())
+                        <div class="md:flex pt-5 pr-10 pl-10 pb-10">
+                            <div class="md:w-1/3">
+                                <h2 class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" >
+                                    Choose attributes:
+                                </h2>
                             </div>
-                                <button class="my-3 mx-2 px-4 py-2 text-sm font-medium
-                                leading-5 text-white transition-colors duration-150
-                                bg-purple-600 border border-transparent rounded-lg
-                                active:bg-purple-600 hover:bg-purple-700 focus:outline-none
-                                focus:shadow-outline-purple" wire:click="createCombinations">
-                                Create combinations</button>
-                        </div>
 
-                    </div>
-                @endif
+                            <div class="md:w-2/3">
+                                    <div class="flex flex-row flex-wrap">
+                                        @foreach ($attr_group as $item)
+                                            <div class="px-2 flex-1">
+                                                <label class="text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4"
+                                                for="attr.{{strtolower($item->name)}}">{{$item->name}}:</label>
+                                                    <select
+                                                    id="attr.{{strtolower($item->name)}}"
+                                                    name="attr.{{strtolower($item->name)}}"
+                                                    wire:model="attr.{{strtolower($item->name)}}"
+                                                    class="block w-full focus:bg-white"
+                                                    multiple>
+
+                                                        @foreach ($item->attributes as $attr )
+                                                            <option value="{{$attr->name}}">{{$attr->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @error("attr.{{strtolower($item->name)}}") <span class="text-red-500">{{ $message }}</span> @enderror
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                        <button class="my-3 mx-2 px-4 py-2 text-sm font-medium
+                                        leading-5 text-white transition-colors duration-150
+                                        bg-purple-600 border border-transparent rounded-lg
+                                        active:bg-purple-600 hover:bg-purple-700 focus:outline-none
+                                        focus:shadow-outline-purple" wire:click.prevent="createCombinations">
+                                        Create combinations</button>
+                                    <div wire:loading wire:target="createCombinations">
+                                        creating...
+                                    </div>
+
+                                </div>
+
+                        </div>
+                    @endif
+                    @if(count($comb_arr) > 0)
+                <div class="flex animate-fade-in">
+                    @foreach ($comb_arr as $key => $attributes)  {{--  size => 38,34; color => black,red --}}
+                    <div class="shf">
+                        @for ($i = 0; $i < count($attributes); $i++) {{--  (1) 1 38, 34; (2) black,red --}}
+
+                                @foreach ($attr_group as $item)
+                                    @if (strtolower($item->name) === $key)
+
+                                        <div class="px-2 py-2 flex-1">
+                                                <select
+                                                id="comb.{{strtolower($item->name)}}"
+                                                name="comb.{{strtolower($item->name)}}"
+                                                class="block w-full focus:bg-white">
+
+                                                    @foreach ($item->attributes as $attr )
+                                                        <option value="{{$attr->name}}" {{($comb_arr[$key][$i] == $attr->name) ? "selected" : "" }}>{{$attr->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                        </div>
+                                    @endif
+                                @endforeach
+
+                        @endfor
+                        </div>
+                    @endforeach
                 </div>
+            @endif
+            </div>
         </div>
     </div>
 

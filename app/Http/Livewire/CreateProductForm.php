@@ -14,9 +14,8 @@ class CreateProductForm extends Component
     use WithFileUploads;
 
     public $attr_group, $name, $article_num, $type, $description, $attr;
-    public $attr_types = [];
     public $images = [];
-
+    public $comb_arr = [];
 
 
     /**
@@ -26,9 +25,6 @@ class CreateProductForm extends Component
      */
     public function mount() {
         $this->attr_group = AttributeGroup::all();
-        foreach($this->attr_group as $group) {
-            array_push($this->attr_types, strtolower($group->name));
-        }
     }
 
     /**
@@ -37,11 +33,19 @@ class CreateProductForm extends Component
      * @return void
      */
     public function createCombinations() {
-        $comb_arr = [];
-        foreach($this->attr_types as $key) {
-            $comb_arr[] = $this->attr[$key];
+
+        $this->validate([
+            'attr.*' => 'required'
+        ]);
+
+
+
+        $this->comb_arr = []; // clear selected values
+
+        foreach($this->attr_group as $item) { // get selected values
+            if(isset($this->attr[strtolower($item->name)]))  $this->comb_arr[strtolower($item->name)] = $this->attr[strtolower($item->name)];
         }
-        dd($comb_arr);
+
     }
 
 
@@ -66,9 +70,14 @@ class CreateProductForm extends Component
 
         $product->save();
 
+        // Save combinations
+        if ($this->type === "variable") {
+            dd('Variable');
+        } else {
+            dd('Simple');
+        }
 
         saveImage($this->images, $product->id);
-
 
         return redirect('/admin/products/' . $product->id);
     }

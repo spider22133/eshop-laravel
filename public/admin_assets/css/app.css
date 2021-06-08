@@ -31402,6 +31402,26 @@ select{
   }
 }
 
+@-webkit-keyframes fade-in{
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in{
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}
+
 @-webkit-keyframes fade-in-down{
   0%{
     opacity: 0;
@@ -31521,6 +31541,11 @@ select{
 .animate-bounce{
   -webkit-animation: bounce 1s infinite;
           animation: bounce 1s infinite;
+}
+
+.animate-fade-in{
+  -webkit-animation: fade-in 0.5s ease-out;
+          animation: fade-in 0.5s ease-out;
 }
 
 .animate-fade-in-down{
@@ -70428,6 +70453,11 @@ readers do not read off random characters that represent icons */
             animation: bounce 1s infinite;
   }
 
+  .sm\:animate-fade-in{
+    -webkit-animation: fade-in 0.5s ease-out;
+            animation: fade-in 0.5s ease-out;
+  }
+
   .sm\:animate-fade-in-down{
     -webkit-animation: fade-in-down 0.5s ease-out;
             animation: fade-in-down 0.5s ease-out;
@@ -101051,6 +101081,11 @@ readers do not read off random characters that represent icons */
   .md\:animate-bounce{
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .md\:animate-fade-in{
+    -webkit-animation: fade-in 0.5s ease-out;
+            animation: fade-in 0.5s ease-out;
   }
 
   .md\:animate-fade-in-down{
@@ -131678,6 +131713,11 @@ readers do not read off random characters that represent icons */
             animation: bounce 1s infinite;
   }
 
+  .lg\:animate-fade-in{
+    -webkit-animation: fade-in 0.5s ease-out;
+            animation: fade-in 0.5s ease-out;
+  }
+
   .lg\:animate-fade-in-down{
     -webkit-animation: fade-in-down 0.5s ease-out;
             animation: fade-in-down 0.5s ease-out;
@@ -162303,6 +162343,11 @@ readers do not read off random characters that represent icons */
             animation: bounce 1s infinite;
   }
 
+  .xl\:animate-fade-in{
+    -webkit-animation: fade-in 0.5s ease-out;
+            animation: fade-in 0.5s ease-out;
+  }
+
   .xl\:animate-fade-in-down{
     -webkit-animation: fade-in-down 0.5s ease-out;
             animation: fade-in-down 0.5s ease-out;
@@ -192926,6 +192971,11 @@ readers do not read off random characters that represent icons */
   .\32xl\:animate-bounce{
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .\32xl\:animate-fade-in{
+    -webkit-animation: fade-in 0.5s ease-out;
+            animation: fade-in 0.5s ease-out;
   }
 
   .\32xl\:animate-fade-in-down{
