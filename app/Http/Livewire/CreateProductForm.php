@@ -4,11 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Product;
-use phpDocumentor\Reflection\Types\This;
 use Livewire\WithFileUploads;
-use App\Models\Attribute;
 use App\Models\AttributeGroup;
-use App\View\Components\ProductVariations;
+use App\Models\ProductAttribute;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class CreateProductForm extends Component
 {
@@ -38,21 +39,17 @@ class CreateProductForm extends Component
     public function createCombinations()
     {
         $this->combinations_arr = []; // clear selected values
+        $this->reset('combi');
 
         foreach ($this->attr_group as $item) { // get selected values
             if (isset($this->attr[strtolower($item->name)]))  $this->combinations_arr[strtolower($item->name)] = $this->attr[strtolower($item->name)];
         }
-        $arr = array();
-        $result = $this->cartasianArray($this->combinations_arr);
-        foreach ($result as $key => $value) {
-            foreach ($this->attr_group as $key2 => $item) {
-                if (isset($this->attr[strtolower($item->name)])){
-                    $arr[$key][strtolower($item->name)] = [$value[$key2]];
-                }
-            }
-        }
 
-       $this->fill(['combi' => $arr]);
+        $result = array();
+        $cartasianArray = $this->cartasianArray($this->combinations_arr);
+        //dd($cartasianArray);
+
+        $this->fill(['combi' => $cartasianArray]);
     }
 
     /**
@@ -63,20 +60,25 @@ class CreateProductForm extends Component
      */
     public function cartasianArray($input)
     {
+        $result = array(array());
 
-        if (!$input) {
-            return array(array());
-        }
-
-        $subset = array_shift($input);
-        $cartesianSubset = $this->cartasianArray($input);
-        $result = array();
-
-        foreach ($subset as $value) {
-            foreach ($cartesianSubset as $p) {
-                array_unshift($p, $value);
-                $result[] = $p;
+        foreach ($input as $key => $values) {
+            if (!$values) {
+                continue;
             }
+
+            $append = array();
+            //$i = 0;
+            foreach ($result as $product) {
+                // if($i == 0) dd($values);
+                foreach ($values as $item) {
+                    $product[$key] = [$item];
+                    $append[] = $product;
+                }
+                // $i++;
+            }
+
+            $result = $append;
         }
 
         return $result;
@@ -90,12 +92,7 @@ class CreateProductForm extends Component
      */
     public function store()
     {
-        // Save combinations
-        if ($this->type === "variable") {
-            dd($this->combi);
-        }
-
-        dd('Simple');
+        // dd($this->combi[0]);
         $this->validate([
             'name' => 'required|min:3',
             'article_num' => 'required',
@@ -103,13 +100,38 @@ class CreateProductForm extends Component
             'images.*' => 'image|max:1024'
         ]);
 
-        $product = new Product([
+        $product = Product::create([
             'name' => $this->name,
             'article_number' => $this->article_num,
             'description' => $this->description,
         ]);
 
         $product->save();
+
+        // Save combinations
+        if ($this->type === "variable") {
+
+            for ($i = 0; $i < count($this->combi); $i++) {
+                $product_combination = ProductAttribute::create([
+                    'product_id' => $product->id,
+                    'article_number' => $this->article_num . "_" . $i,
+                    'description' => $this->description
+                ]);
+                $product_combination->save();
+                foreach ($this->combi[$i] as $key => $value) {
+
+                    $attribute_id = DB::table('attributes')->where('name', $value[0])->pluck('id');
+
+                    DB::table("product_attribute_combination")->insert([
+                        'attribute_id' => $attribute_id->first(),
+                        'product_attribute_id' =>  $product_combination->id,
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ]);
+                }
+            }
+        }
+
 
         saveImage($this->images, $product->id);
 

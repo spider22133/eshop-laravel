@@ -109,7 +109,7 @@
         <div class="md:w-2/3">
             <textarea class="form-textarea block w-full focus:bg-white" id="description" name="description" value=""
                 rows="8" wire:model="description"></textarea>
-            <p class="py-2 text-sm text-gray-600">add notes about populating the field</p>
+                @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
     </div>
     <div class="md:flex mb-6">

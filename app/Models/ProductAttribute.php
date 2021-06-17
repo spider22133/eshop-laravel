@@ -10,7 +10,10 @@ class ProductAttribute extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'article_number',
+        'product_id',
+        'description'
     ];
 
     public function attributes(){

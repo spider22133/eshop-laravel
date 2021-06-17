@@ -28,7 +28,8 @@
                             >
                                 <img
                                     class="object-cover w-full h-full "
-                                    src="{{ isset($item->product_attributes[0]) ? $item->product_attributes[0]->images[0]->src['thumb'] :
+
+                                    src="{{ isset($item->product_attributes[0]->images[0]) ? $item->product_attributes[0]->images[0]->src['thumb'] :
                                      asset($item->images[0]->src['thumb'])
                                 }}"
                                     alt=""
