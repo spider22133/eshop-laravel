@@ -49,7 +49,7 @@
             </div>
             <div class="variable_product_card_content relative overflow-hidden transition-all max-h-0 duration-700 bg-gray-50"
                 x-ref="container1"
-                x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                x-bind:style="selected == 1 ? 'max-height: 100%' : ''">
                 @if ($attr_group->count())
                 <div class="md:flex pt-5 pr-10 pl-10 pb-10">
                     <div class="md:w-1/3">
@@ -92,7 +92,7 @@
                 </div>
                 @endif
                 @if(count($combi) > 0)
-                <div class="flex flex-col pt-5 pr-10 pl-10 pb-10 animate-fade-in">
+                <div class="flex flex-col pt-5 pb-10 animate-fade-in" x-data="{selected_combi:null}">
                     <x-product-variations :combiarray="$combi" :attr-group="$attr_group"/>
                 </div>
                 @endif

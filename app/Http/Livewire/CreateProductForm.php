@@ -47,7 +47,8 @@ class CreateProductForm extends Component
 
         $result = array();
         $cartasianArray = $this->cartasianArray($this->combinations_arr);
-        //dd($cartasianArray);
+
+
 
         $this->fill(['combi' => $cartasianArray]);
     }
@@ -72,7 +73,7 @@ class CreateProductForm extends Component
             foreach ($result as $product) {
                 // if($i == 0) dd($values);
                 foreach ($values as $item) {
-                    $product[$key] = [$item];
+                    $product[$key] = $item;
                     $append[] = $product;
                 }
                 // $i++;
@@ -92,7 +93,6 @@ class CreateProductForm extends Component
      */
     public function store()
     {
-        // dd($this->combi[0]);
         $this->validate([
             'name' => 'required|min:3',
             'article_num' => 'required',
@@ -117,10 +117,12 @@ class CreateProductForm extends Component
                     'article_number' => $this->article_num . "_" . $i,
                     'description' => $this->description
                 ]);
+
                 $product_combination->save();
+
                 foreach ($this->combi[$i] as $key => $value) {
 
-                    $attribute_id = DB::table('attributes')->where('name', $value[0])->pluck('id');
+                    $attribute_id = DB::table('attributes')->where('name', $value)->pluck('id');
 
                     DB::table("product_attribute_combination")->insert([
                         'attribute_id' => $attribute_id->first(),
