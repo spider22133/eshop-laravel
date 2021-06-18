@@ -8,9 +8,9 @@
             </label>
         </div>
         <div class="md:w-2/3">
-            <input class="form-input block w-full focus:bg-white" id="name" name="name" type="text" value=""
-                wire:model="name">
-            @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+            <input class="form-input block w-full focus:bg-white" type="text" value=""
+                wire:model="name.0">
+            @error('name.0') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
     </div>
     <div class="md:flex mb-6">
@@ -119,7 +119,7 @@
             </label>
         </div>
         <div class="md:w-2/3">
-            <input class="form-input block w-full focus:bg-white" id="article_num" name="images" type="file" value=""
+            <input class="form-input block w-full focus:bg-white" id="images" name="images" type="file" value=""
                 wire:model="images" multiple>
             @error('images.*') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>

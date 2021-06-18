@@ -18,8 +18,29 @@ class CreateProductForm extends Component
     public $attr_group, $name, $article_num, $type, $description, $attr;
     public $combi = [];
     public $images = [];
+    public $var_images = [];
     public $combinations_arr = [];
 
+
+    protected $rules = [
+        'name.0' => 'required|min:3',
+        'name.*' => 'min:3',
+        'article_num' => 'required',
+        'description' => 'min:5',
+        'images.*' => 'image|max:1024',
+        'var_images.*.*'  => 'image|max:1024'
+    ];
+
+    protected $messages  = [
+        'name.0.required' => 'Name field is required.',
+        'name.*.min' => 'Name must be at least :min characters.',
+        'var_images.*.*.image' => 'Uploaded file must be an image.'
+    ];
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     /**
      * mount
@@ -47,8 +68,6 @@ class CreateProductForm extends Component
 
         $result = array();
         $cartasianArray = $this->cartasianArray($this->combinations_arr);
-
-
 
         $this->fill(['combi' => $cartasianArray]);
     }
@@ -85,7 +104,6 @@ class CreateProductForm extends Component
         return $result;
     }
 
-
     /**
      * Store new product in database.
      *
@@ -93,12 +111,9 @@ class CreateProductForm extends Component
      */
     public function store()
     {
-        $this->validate([
-            'name' => 'required|min:3',
-            'article_num' => 'required',
-            'description' => 'min:5',
-            'images.*' => 'image|max:1024'
-        ]);
+
+        dd($this->validate());
+        $this->validate();
 
         $product = Product::create([
             'name' => $this->name,
@@ -110,6 +125,7 @@ class CreateProductForm extends Component
 
         // Save combinations
         if ($this->type === "variable") {
+
 
             for ($i = 0; $i < count($this->combi); $i++) {
                 $product_combination = ProductAttribute::create([
