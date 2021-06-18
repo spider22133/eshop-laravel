@@ -112,16 +112,18 @@ class CreateProductForm extends Component
     public function store()
     {
 
-        dd($this->validate());
+       // dd($this->validate());
         $this->validate();
 
         $product = Product::create([
-            'name' => $this->name,
+            'name' => $this->name[0],
             'article_number' => $this->article_num,
             'description' => $this->description,
         ]);
 
         $product->save();
+
+        saveImage($this->images, $product->id);
 
         // Save combinations
         if ($this->type === "variable") {
@@ -147,11 +149,10 @@ class CreateProductForm extends Component
                         'updated_at' => now()
                     ]);
                 }
+
+                saveImage($this->var_images[$i], $product_combination->id, true);
             }
         }
-
-
-        saveImage($this->images, $product->id);
 
         return redirect('/admin/products/' . $product->id);
     }

@@ -10,6 +10,17 @@ class Image extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'product_id',
+        'src'
+    ];
+
+
+    /**
      * The attributes that should be cast.
      *
      * @var array
@@ -19,7 +30,8 @@ class Image extends Model
     ];
 
 
-    public function product_attributes() {
+    public function product_attributes()
+    {
         return $this->belongsToMany(ProductAttribute::class, 'product_attribute_images');
     }
 }
