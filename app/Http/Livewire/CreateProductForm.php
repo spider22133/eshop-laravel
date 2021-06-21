@@ -104,6 +104,7 @@ class CreateProductForm extends Component
         return $result;
     }
 
+
     /**
      * Store new product in database.
      *
@@ -125,7 +126,6 @@ class CreateProductForm extends Component
 
         // Save combinations
         if ($this->type === "variable") {
-
 
             for ($i = 0; $i < count($this->combi); $i++) {
                 $product_combination = ProductAttribute::create([
