@@ -15,14 +15,15 @@ class AttributeGroupSeeder extends Seeder
     public function run()
     {
         $attributes = array(
-            array('group_type' => 'select','name' => 'Size'),
-            array('group_type' => 'color','name' => 'Color'),
-            array('group_type' => 'select','name' => 'Material'),
+            array('is_color_group' => 0, 'group_type' => 'select','name' => 'Size'),
+            array('is_color_group' => 1,'group_type' => 'color','name' => 'Color'),
+            array('is_color_group' => 0,'group_type' => 'select','name' => 'Material'),
         );
 
         foreach ($attributes as $attribute) {
                 $attr = new AttributeGroup(
                     [
+                        'is_color_group' =>$attribute['is_color_group'],
                         'group_type' =>$attribute['group_type'],
                         'name' => $attribute['name']
                     ]

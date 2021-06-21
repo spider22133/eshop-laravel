@@ -19,22 +19,22 @@
                                     src="{{ isset($item->product_attributes[0]->images[0]) ? $item->product_attributes[0]->images[0]->src['small'] : asset($item->images[0]->src['full']) }}"
                                     alt="">
                                 <div class="thumbs d-flex" style="width: 100%; background-color: #fff">
-
+                                    {{ dd($item->colored_product_attributes) }}
                                     @foreach ($item->product_attributes as $var_item)
+                                       {{--  @if ($var_item->attributes[$loop->index]->id_attribute_group  === 2) --}}
                                         <div id="{{ $var_item->article_number }}" class="product_thumb d-flex pr-1">
                                             <a href="/products/{{ $var_item->id }}">
                                                 @if (isset($var_item->images[0]))
                                                     <img class="img-thumbnail" width="75"
-                                                    src="{{ $var_item->images[0]->src['small'] }}" alt="">
+                                                        src="{{ $var_item->images[0]->src['small'] }}" alt="">
                                                 @else
                                                     <p>
                                                         {{ $var_item->article_number }}
                                                     </p>
                                                 @endif
-
                                             </a>
-
                                         </div>
+                                       {{--  @endif --}}
                                     @endforeach
                                 </div>
                             </div>

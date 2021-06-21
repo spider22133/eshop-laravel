@@ -24,6 +24,10 @@ class Product extends Model
         return $this->hasMany(ProductAttribute::class);
     }
 
+    public function colored_product_attributes() {
+
+    }
+
     public function images() {
         return $this->hasMany(Image::class);
     }
