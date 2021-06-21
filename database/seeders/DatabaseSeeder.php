@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Image;
+use App\Models\Manufacturer;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             AttributeGroupSeeder::class,
-            AttributeSeeder::class
+            AttributeSeeder::class,
+            ManufacturerSeeder::class
         ]);
 
         \App\Models\Product::factory(100)->create()

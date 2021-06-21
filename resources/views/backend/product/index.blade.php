@@ -41,7 +41,7 @@
                                 ></div>
                             </div>
                             <div>
-                            <a href="/admin/products/{{$item->id}}"><p class="font-semibold">{{ $item->name }}</p></a>
+                            <a href="/admin/products/{{$item->id}}"><p class="font-semibold">{{ ucfirst($item->name) }} - {{ $item->manufacturer->name }}</p></a>
                             </div>
                         </div>
                     </td>

@@ -23,6 +23,7 @@ class ProductFactory extends Factory
     {
         return [
             'article_number' => $this->faker->unique()->swiftBicNumber,
+            'manufacturer_id' => random_int(1,5),
             'description' => $this->faker->realText(),
             'description_short' => $this->faker->realText(100),
             'name' => $this->faker->unique()->words(random_int(2,3), true)

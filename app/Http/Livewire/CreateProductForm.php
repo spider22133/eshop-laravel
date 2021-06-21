@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Product;
 use Livewire\WithFileUploads;
 use App\Models\AttributeGroup;
+use App\Models\Manufacturer;
 use App\Models\ProductAttribute;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -15,16 +16,18 @@ class CreateProductForm extends Component
 {
     use WithFileUploads;
 
-    public $attr_group, $name, $article_num, $type, $description, $attr;
+    public $attr_group, $name, $article_num, $manufacturer, $type, $description, $attr;
     public $combi = [];
     public $images = [];
     public $var_images = [];
     public $combinations_arr = [];
+    public $manufacturer_arr = [];
 
 
     protected $rules = [
         'name.0' => 'required|min:3',
         'name.*' => 'min:3',
+        'manufacturer' => 'required',
         'article_num' => 'required',
         'description' => 'min:5',
         'images.*' => 'image|max:1024',
@@ -50,6 +53,7 @@ class CreateProductForm extends Component
     public function mount()
     {
         $this->attr_group = AttributeGroup::all();
+        $this->manufacturer_arr = Manufacturer::all();
     }
 
     /**
@@ -113,11 +117,12 @@ class CreateProductForm extends Component
     public function store()
     {
 
-       // dd($this->validate());
+        dd($this->manufacturer);
         $this->validate();
 
         $product = Product::create([
             'name' => $this->name[0],
+            'manufacturer' => $this->manufacturer,
             'article_number' => $this->article_num,
             'description' => $this->description,
         ]);
