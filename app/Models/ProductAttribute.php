@@ -43,12 +43,4 @@ class ProductAttribute extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function filteredByColor()
-    {
-        return $this->belongsToMany(Attribute::class, 'product_attribute_combination');
-    }
-
-//    public function getOneImageArray() {
-//       return $this->images()->select('src')->wherePivot('product_attribute_id', $this->id)->limit(1);;
-//    }
 }

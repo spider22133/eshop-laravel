@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\Models\ProductAttribute;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
 
     public function __construct()
     {
-      $this->middleware('is_admin')->except(['index','show']);
+        $this->middleware('is_admin')->except(['index', 'show']);
     }
 
     /**
@@ -23,11 +24,29 @@ class ProductController extends Controller
      */
     public function index()
     {
+
         $status = Session::get('status');
         $products = Product::orderBy('created_at', 'DESC')->simplePaginate(6);
 
+        $colored_products = collect([]);
+        foreach ($products as $value) {
+            $request = DB::table('product_attributes')
+                ->join('product_attribute_combination', 'product_attributes.id', '=', 'product_attribute_combination.product_attribute_id')
+                ->join('attributes', 'product_attribute_combination.attribute_id', '=', 'attributes.id')
+                ->join('attribute_groups', 'attribute_groups.id', '=', 'attributes.id_attribute_group')
+                ->where('product_attributes.product_id', $value->id)
+                ->where('attribute_groups.is_color_group', 1)
+                ->distinct()
+                ->get(['product_attribute_combination.product_attribute_id', 'attributes.name', 'product_attributes.product_id', 'attributes.color', 'attributes.id']);
+
+                foreach ($request->unique('name') as $item) {
+                    $colored_products->put($value->id, [$this->getVarProductById($item->product_attribute_id)]);
+                }
+        }
+
         return view('frontend.product.catalog', [
             'products' => $products,
+            'colored_products' => $colored_products,
             'status' => $status
         ]);
     }
@@ -96,5 +115,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+
+    public function getVarProductById($id)
+    {
+        $product = new ProductAttribute();
+        return $product::findOrFail($id);
     }
 }

@@ -3,35 +3,35 @@
     @csrf
     <div class="md:flex mb-6">
         <div class="md:w-1/3">
-            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="name">
+            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4 dark:hover:text-gray-200 dark:text-gray-100" for="name">
                 Name
             </label>
         </div>
         <div class="md:w-2/3">
-            <input class="form-input block w-full focus:bg-white" type="text" value="" wire:model="name.0">
+            <input class="form-input block w-full focus:bg-white dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200" type="text" value="" wire:model="name.0">
             @error('name.0') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
     </div>
     <div class="md:flex mb-6">
         <div class="md:w-1/3">
-            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="article_num">
+            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4 dark:hover:text-gray-200 dark:text-gray-100" for="article_num">
                 Article number
             </label>
         </div>
         <div class="md:w-2/3">
-            <input class="form-input block w-full focus:bg-white" id="article_num" name="article_num" type="text"
+            <input class="form-input block w-full focus:bg-white dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200" id="article_num" name="article_num" type="text"
                 value="" wire:model="article_num">
             @error('article_num') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
     </div>
     <div class="md:flex mb-6">
         <div class="md:w-1/3">
-            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="manufacturer">
+            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4 dark:hover:text-gray-200 dark:text-gray-100" for="manufacturer">
                 Manufacturer
             </label>
         </div>
         <div class="md:w-2/3">
-            <select name="type" class="form-select block w-full focus:bg-white" id="manufacturer"
+            <select name="type" class="form-select block w-full focus:bg-white dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200" id="manufacturer"
                 wire:model="manufacturer">
                 <option value="">Choose manufacturer name</option>
                 @foreach ($manufacturer_arr as $item)
@@ -44,12 +44,12 @@
     </div>
     <div class="md:flex mb-6">
         <div class="md:w-1/3">
-            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="type">
+            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4 dark:hover:text-gray-200 dark:text-gray-100" for="type">
                 Type of product
             </label>
         </div>
         <div class="md:w-2/3">
-            <select name="type" class="form-select block w-full focus:bg-white" id="type" wire:model="type"
+            <select name="type" class="form-select block w-full focus:bg-white dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200" id="type" wire:model="type"
                 x-model="selectedOption">
                 <option value="Default">Default</option>
                 <option value="variable">Variable product</option>
@@ -61,10 +61,10 @@
         <div id="combinations" class="variable_product_card border border-gray-400 rounded" x-data="{selected:null}">
             <div class="variable_product_card_header flex items-center justify-between px-4 py-3 border-b border-gray-200"
                 x-on:click="selected !== 1 ? selected = 1 : selected = null">
-                <h2 class="font-bold">Combinations</h2>
+                <h2 class="font-bold dark:text-gray-100">Combinations</h2>
                 <span :class="selected == 1 ? 'fa-chevron-up' : 'fa-chevron-down'" class="fas"></span>
             </div>
-            <div class="variable_product_card_content relative overflow-hidden transition-all max-h-0 duration-700 bg-gray-50"
+            <div class="variable_product_card_content relative overflow-hidden transition-all max-h-0 duration-700 bg-gray-50 dark:bg-gray-800"
                 x-ref="container1" x-bind:style="selected == 1 ? 'max-height: 100%' : ''">
                 @if ($attr_group->count())
                     <div class="md:flex pt-5 pr-10 pl-10 pb-10">
@@ -83,7 +83,8 @@
                                         <select id="attr.{{ strtolower($item->name) }}"
                                             name="attr.{{ strtolower($item->name) }}"
                                             wire:model="attr.{{ strtolower($item->name) }}"
-                                            class="block w-full focus:bg-white" multiple>
+                                            class="block w-full focus:bg-white dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                                            multiple>
 
                                             @foreach ($item->attributes as $attr)
                                                 <option value="{{ $attr->name }}">{{ $attr->name }}</option>
@@ -119,24 +120,24 @@
 
     <div class="md:flex mb-6">
         <div class="md:w-1/3">
-            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="description">
+            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4 dark:hover:text-gray-200 dark:text-gray-100" for="description">
                 Description
             </label>
         </div>
         <div class="md:w-2/3">
-            <textarea class="form-textarea block w-full focus:bg-white" id="description" name="description" value=""
+            <textarea class="form-textarea block w-full focus:bg-white dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200" id="description" name="description" value=""
                 rows="8" wire:model="description"></textarea>
             @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
     </div>
     <div class="md:flex mb-6">
         <div class="md:w-1/3">
-            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4" for="images">
+            <label class="block text-gray-600 font-bold md:text-left mb-3 md:mb-0 pr-4 dark:hover:text-gray-200 dark:text-gray-100" for="images">
                 Image
             </label>
         </div>
         <div class="md:w-2/3">
-            <input class="form-input block w-full focus:bg-white" id="images" name="images" type="file" value=""
+            <input class="form-input block w-full focus:bg-white dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200" id="images" name="images" type="file" value=""
                 wire:model="images" multiple>
             @error('images.*') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>

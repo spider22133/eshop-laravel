@@ -20,18 +20,29 @@ class Product extends Model
         'description'
     ];
 
+    /**
+     * Get all connected product attributes variations
+     *
+     * @return void
+     */
     public function product_attributes() {
         return $this->hasMany(ProductAttribute::class);
     }
 
-    public function colored_product_attributes() {
-
-    }
-
+    /**
+     * Get all connected images
+     *
+     * @return void
+     */
     public function images() {
         return $this->hasMany(Image::class);
     }
 
+    /**
+     * Get all connected manufacturers
+     *
+     * @return void
+     */
     public function manufacturer(){
         return $this->belongsTo(Manufacturer::class);
     }

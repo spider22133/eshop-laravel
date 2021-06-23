@@ -13,4 +13,7 @@ class AttributeGroup extends Model
         return $this->hasMany(Attribute::class,'id_attribute_group');
     }
 
+   /*  public function isColorGroup() {
+        $this->with
+    } */
 }

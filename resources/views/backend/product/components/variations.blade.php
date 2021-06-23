@@ -6,7 +6,9 @@
             @if (isset($attributes[strtolower($item->name)]))
                 <div class="px-2 py-2 flex-auto">
 
-                    <select style="width: 100%" id="combi.{{ $loop->parent->index }}.{{ strtolower($item->name) }}"
+                    <select class="dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                        style="width: 100%"
+                        id="combi.{{ $loop->parent->index }}.{{ strtolower($item->name) }}"
                         name="combi.{{ $loop->parent->index }}.{{ strtolower($item->name) }}"
                         wire:model="combi.{{ $loop->parent->index }}.{{ strtolower($item->name) }}">
 
