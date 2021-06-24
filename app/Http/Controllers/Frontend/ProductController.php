@@ -24,25 +24,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-
         $status = Session::get('status');
         $products = Product::orderBy('created_at', 'DESC')->simplePaginate(6);
-
-        $colored_products = collect([]);
-        foreach ($products as $value) {
-            $request = DB::table('product_attributes')
-                ->join('product_attribute_combination', 'product_attributes.id', '=', 'product_attribute_combination.product_attribute_id')
-                ->join('attributes', 'product_attribute_combination.attribute_id', '=', 'attributes.id')
-                ->join('attribute_groups', 'attribute_groups.id', '=', 'attributes.id_attribute_group')
-                ->where('product_attributes.product_id', $value->id)
-                ->where('attribute_groups.is_color_group', 1)
-                ->distinct()
-                ->get(['product_attribute_combination.product_attribute_id', 'attributes.name', 'product_attributes.product_id', 'attributes.color', 'attributes.id']);
-
-                foreach ($request->unique('name') as $item) {
-                    $colored_products->put($value->id, [$this->getVarProductById($item->product_attribute_id)]);
-                }
-        }
+        $colored_products = $this->getColoredProductVariations($products);
 
         return view('frontend.product.catalog', [
             'products' => $products,
@@ -122,5 +106,30 @@ class ProductController extends Controller
     {
         $product = new ProductAttribute();
         return $product::findOrFail($id);
+    }
+
+
+    public function getColoredProductVariations($products) {
+        $colored_products = collect([]);
+        foreach ($products as $value) {
+            $request = DB::table('product_attributes')
+                ->join('product_attribute_combination', 'product_attributes.id', '=', 'product_attribute_combination.product_attribute_id')
+                ->join('attributes', 'product_attribute_combination.attribute_id', '=', 'attributes.id')
+                ->join('attribute_groups', 'attribute_groups.id', '=', 'attributes.id_attribute_group')
+                ->where('product_attributes.product_id', $value->id)
+                ->where('attribute_groups.is_color_group', 1)
+                ->distinct()
+                ->get(['product_attribute_combination.product_attribute_id', 'attributes.name', 'product_attributes.product_id', 'attributes.color', 'attributes.id']);
+
+
+                $arr = [];
+                foreach ($request->unique('name') as $item) {
+                    $arr[] = $this->getVarProductById($item->product_attribute_id);
+                }
+
+                $colored_products->put($value->id, $arr);
+        }
+
+        return $colored_products;
     }
 }

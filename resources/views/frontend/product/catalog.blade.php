@@ -15,29 +15,33 @@
                         <div class="card mb-4 shadow-sm">
                             <div class="bd-placeholder-img card-img-top p-3">
 
-                                {{-- <img class="img-fluid img-custom"
+                                <img class="img-fluid img-custom"
                                     src="{{ isset($item->product_attributes[0]->images[0]) ? $item->product_attributes[0]->images[0]->src['small'] : asset($item->images[0]->src['full']) }}"
-                                    alt=""> --}}
+                                    alt="">
                                 <div class="thumbs d-flex" style="width: 100%; background-color: #fff">
+                                    @if ($colored_products)
+                                        @foreach ($colored_products as $key => $var_item)
 
-                                    @foreach ($colored_products as $var_item)
-                                        {{ dd($colored_products)}}
-                                        @if ($item->id === $key)
-
-                                            <div id="{{ $var_item->article_number }}" class="product_thumb d-flex pr-1">
-                                                <a href="/products/{{ $var_item->id }}">
-                                                    @if (isset($var_item->images[0]))
-                                                        <img class="img-thumbnail" width="75"
-                                                            src="{{ $var_item->images[0]->src['small'] }}" alt="">
-                                                    @else
-                                                        <p>
-                                                            {{ $var_item->article_number }}
-                                                        </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endif
-                                    @endforeach
+                                            @if ($item->id === $key)
+                                                @foreach ($var_item as $variation)
+                                                    <div id="{{ $variation->article_number }}"
+                                                        class="product_thumb d-flex pr-1">
+                                                        <a href="/products/{{ $variation->id }}">
+                                                            @if (isset($variation->images[0]))
+                                                                <img class="img-thumbnail" width="75"
+                                                                    src="{{ $variation->images[0]->src['small'] }}"
+                                                                    alt="">
+                                                            @else
+                                                                <p>
+                                                                    {{ $variation->article_number }}
+                                                                </p>
+                                                            @endif
+                                                        </a>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <div class="card-body">
