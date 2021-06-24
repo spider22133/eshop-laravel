@@ -117,12 +117,12 @@ class CreateProductForm extends Component
     public function store()
     {
         $this->validate();
-
+ 
         $product = Product::create([
-            'name' => $this->name[0],
             'manufacturer_id' => $this->manufacturer,
             'article_number' => $this->article_num,
             'description' => $this->description,
+            'name' => $this->name[0]
         ]);
 
         $product->save();

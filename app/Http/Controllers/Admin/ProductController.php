@@ -24,7 +24,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-
         $products = Product::orderBy('created_at', 'DESC')->simplePaginate(10);
 
         return view('backend.product.index', [
@@ -39,7 +38,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-
         return view('backend.product.create');
     }
 

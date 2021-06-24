@@ -19,6 +19,8 @@ Route::namespace('Frontend')->group(function (){
     Route::get('/', 'ProductController@index')->name('homepage');
     Route::get('/catalog', 'ProductController@index')->name('catalog');
     Route::get('/products/{id}', 'ProductController@show')->name('frontend.product.single');
+    Route::get('/products/{id}/{var_id}', 'ProductController@show')->name('frontend.product.single');
+  
     Route::get('/account', function () {
         return view('frontend.user.account');
     })->middleware('auth');

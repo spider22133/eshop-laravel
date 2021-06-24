@@ -62,9 +62,15 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $var_id = null)
     {
-        return view('frontend.product.single', ['product' => Product::findOrFail($id)]);
+        $var_product = ProductAttribute::findOrFail($var_id);
+        if(isset($var_id)) return view('frontend.product.single', ['product' => ProductAttribute::findOrFail($var_id)->product]);
+
+        return view('frontend.product.single', [
+            'product' => Product::findOrFail($id),
+            'var_id' => $var_id
+        ]);
     }
 
     /**
