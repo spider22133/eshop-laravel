@@ -21,12 +21,7 @@ class ManufacturerSeeder extends Seeder
             ['name' => 'Endura'],
             ['name' => 'Giro']
         ];
-        foreach ($manufacturers_data as $item) {
-            $manufacturer = new Manufacturer([
-                'name' => $item['name']
-            ]);
 
-            $manufacturer->save();
-        }
+        Manufacturer::insert($manufacturers_data);
     }
 }
